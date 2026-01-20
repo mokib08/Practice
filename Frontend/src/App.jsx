@@ -1,12 +1,12 @@
-import React from 'react'
-import Create from './components/Create'
-import Read from './components/Read'
+
+import Mainroutes from './routes/Mainroutes'
+import Nav from './components/Nav'
 
 const App = () => {
   return (
-    <div className='text-white flex p-10 w-screen h-screen bg-gray-800'>
-      <Create />
-      <Read />
+    <div className='text-white px-[10%] w-screen h-screen bg-gray-800'>
+      <Nav />
+      <Mainroutes />
     </div>
   )
 }

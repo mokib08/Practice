@@ -1,16 +1,14 @@
 
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import Wrapper from './Wrapper'
 import App from './App'
-import { ToastContainer } from 'react-toastify'
+import { BrowserRouter } from 'react-router-dom'
 
 
 createRoot(document.getElementById('root')).render(
 
-   <Wrapper >
+   <BrowserRouter >
       <App />
-      <ToastContainer position='top-center' />
-   </Wrapper>
+   </BrowserRouter>
 
 )
