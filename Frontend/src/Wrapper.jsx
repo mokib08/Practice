@@ -1,24 +1,22 @@
 import { createContext, useState } from "react"
 
-export const TodoContext = createContext(null)
+export const todoContext = createContext(null)
 
-
-
-const Wrapper = ({ children }) => {
+const Wrapper = (props) => {
 
     const [todo, setTodo] = useState([
         {
             id: 1,
             title: "Kamm krle bhai",
-            isComplete: false
+            isCompleted: false
         }
     ])
 
-    return (
-        <TodoContext.Provider value={[todo, setTodo]}>
-            {children}
-        </TodoContext.Provider>
-    )
+  return (
+    <todoContext.Provider value={[todo, setTodo]}>
+        {props.children}
+    </todoContext.Provider>
+  )
 }
 
 export default Wrapper
