@@ -1,13 +1,14 @@
-import { createContext, useState } from "react"
+import React, { createContext, useState } from 'react'
 
-export const todoContext = createContext(null)
+
+export const  todoContext = createContext(null)
 
 const Wrapper = (props) => {
 
     const [todo, setTodo] = useState([
         {
             id: 1,
-            title: "Kamm krle bhai",
+            title: "kamm krle bhai",
             isCompleted: false
         }
     ])
