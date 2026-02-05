@@ -7,13 +7,11 @@ import RecipeContext from './context/RecipeContext'
 
 
 createRoot(document.getElementById('root')).render(
-      <RecipeContext>
-            <BrowserRouter>
 
-                  <App />
-            </BrowserRouter>
-      </RecipeContext>
-
-
+    <RecipeContext>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </RecipeContext>
 
 )
