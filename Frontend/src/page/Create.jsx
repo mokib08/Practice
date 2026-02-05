@@ -33,35 +33,43 @@ const Create = () => {
             <input 
                {...register("image")}
                 type="url"
+                className='block border-b outline-0 pb-2 mt-10'
                 placeholder="Enter image url"
              />
+              
+               <small className='text-red-400'>This is have the error is shose</small>
 
              <input 
                {...register("title")}
                 type="text"
                 placeholder="Enter recipe title"
+                className='block border-b outline-0 pb-2 mt-10'
              />
 
              <input 
                {...register("chef")}
                 type="text"
                 placeholder="chef name"
+                className='block border-b outline-0 pb-2 mt-10'
              />
 
              <textarea
                {...register("desc")}
                 type="text"
                 placeholder='// Write ingredent'
+                className='block border-b outline-0 pb-2 mt-10'
              ></textarea>
 
              <textarea
                {...register("ingre")}
                 type="text"
                 placeholder='// Write instraction'
+                className='block border-b outline-0 pb-2 mt-10'
              ></textarea>
 
              <select
                {...register("catagory")}
+                className='block border-b outline-0 pb-2 mt-10'
              >
                 
                 <option value="breakfast">Breckfast</option>

@@ -9,7 +9,7 @@ const Recipes = () => {
   const renderRecipe = data.map((recipe) => (<RecipeCard key={recipe.id} recipe={recipe} />))
 
   return (
-    <div>{data.length > 0 ? renderRecipe : <p>No recipe available</p>}</div>
+    <div className='flex flex-wrap'>{data.length > 0 ? renderRecipe : <p className='text-center w-full'>No recipe available</p>}</div>
   )
 }
 
