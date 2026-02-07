@@ -1,103 +1,90 @@
 import React, { useContext } from 'react'
-import { recipecontext } from '../context/RecipeContext'
+import { recipeContext } from '../context/RecipeContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
 const SingleRecipe = () => {
 
-    const { data, setData } = useContext(recipecontext)
-
+    const [data, setData] = useContext(recipeContext)
     const navigator = useNavigate()
-
     const params = useParams()
-    const recipe = data.find((recip) => params.id == recip.id)
-
+    const recipe = data.find((recip) => recip.id == params.id);
 
     const {
         register,
-        handleSubmit,
-        reset
+        handleSubmit
     } = useForm({
-        defaultValues:{
-            title: recipe.title,
-            image : recipe.image,
-            chef : recipe.chef,
-            desc : recipe.desc
+        defaultValues: {
+            title: recipe.title, 
+            image: recipe.image,
+            desc: recipe.desc,
+            chef: recipe.chef
         }
     })
 
 
-    const submitHandler = (recip) => {
+    const submitHandler = (recipe) => {
         const index = data.findIndex((recip) => params.id == recip.id)
         const copyData = [...data]
-        copyData[index] = {...copyData[index], ...recip}
+        copyData[index] = {...copyData[index], ...recipe}
         setData(copyData)
-        
     }
 
 
-    const DeleteHandler = () => {
-       const filterData = data.filter((r) => r.id != params.id)
-       setData(filterData)
-       navigator('/recipes')
+    const DeleteRecipe = () => {
+        const filterData = data.filter((r) => r.id != params.id)
+        setData(filterData);
 
+        navigator('/recipe')
     }
 
     return (
-        <div className='mt-10 w-full flex gap-10'>
-            <div className="left w-1/2 p-2">
-                <h1 className='text-5xl font-black'>{recipe.title}</h1>
-                <img className='h-[20vh]' src={recipe.image} alt="" />
+        <div>
+            <div>
+                <img src={recipe.image} alt="" />
+                <h1>{recipe.title}</h1>
+                <h3>{recipe.chef}</h3>
+                <p>{recipe.desc}</p>
+
             </div>
 
-
-            <form className="w-1/2 p-2" onSubmit={handleSubmit(submitHandler)}>
+            <form onSubmit={handleSubmit(submitHandler)} >
                 <input
                     {...register("image")}
                     type="url"
-                    className='block border-b outline-0 pb-2 mt-10'
-                    placeholder='Enter image url'
+                    placeholder='enter image url'
                 />
-                <small className='text-red-400'>This is have the error is shose</small>
 
                 <input
                     {...register('title')}
                     type="text"
-                    placeholder='Recipe title'
-                    className='block border-b outline-0 pb-2 mt-10'
+                    placeholder='Enter title'
                 />
 
                 <input
-                    {...register("chef")}
+                    {...register('chef')}
                     type="text"
-                    placeholder='Chef name'
-                    className='block border-b outline-0 pb-2 mt-10'
+                    placeholder='chef'
                 />
 
                 <textarea
-                    {...register("desc")}
-                    placeholder='// write ingredent'
-                    className='block border-b outline-0 pb-2 mt-10'
+                    {...register('desc')}
+                    placeholder='// Write Ingreadent'
                 ></textarea>
 
                 <textarea
-                    {...register("instrac")}
-                    placeholder='// write instraction'
-                    className='block border-b outline-0 pb-2 mt-10'
+                    {...register('instrac')}
+                    placeholder='// Write instraction'
                 ></textarea>
 
-                <select
-                    {...register("catagory")}
-                    className='block border-b outline-0 pb-2 mt-10'
-                >
-                    <option value="breackfast">Breackfast</option>
+                <select {...register('catagory')} >
+                    <option value="breakfast">BreackFast</option>
                     <option value="lunch">Lunch</option>
-                    <option value="supper">Supper</option>
                     <option value="dinner">Dinner</option>
                 </select>
 
-                <button className='block mt-5 bg-blue-900 rounded px-4 py-2'>Update Recipe</button>
-                <button onClick={DeleteHandler} className='block mt-5 bg-red-900 rounded px-4 py-2' >Delete Recipe</button>
+                <button>Update recipe</button>
+                <button onClick={DeleteRecipe}>Delete recipe</button>
             </form>
 
         </div>

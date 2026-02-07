@@ -1,78 +1,67 @@
-import React, { useContext } from 'react'
-import { recipecontext } from '../context/RecipeContext'
 import {useForm} from 'react-hook-form'
 import {nanoid} from 'nanoid'
-
-
+import { useContext } from 'react'
+import { recipeContext } from '../context/RecipeContext'
 
 const Create = () => {
 
-    const {data , setData } = useContext(recipecontext)
+    const [data, setData] = useContext(recipeContext)
+
+   const {
+    register,
+    handleSubmit,
+
+   } = useForm()
 
 
-    const {
-        register,
-        handleSubmit,
-        reset
-    } = useForm()
-
-
-    const submitHandler = (recip) => {
-        recip.id = nanoid();
-        const copyData = [...data]
-        copyData.push(recip)
+   const submitHandler = (recipe) => {
+        recipe.id = nanoid()
+        const copyData = [...data];
+        copyData.push(recipe)
         setData(copyData)
-
-    }
+        
+        
+   }
 
 
   return (
     <div>
-        <form onSubmit={handleSubmit(submitHandler)}>
-            <input 
+        <form onSubmit={handleSubmit(submitHandler)} >
+            <input
                 {...register("image")}
-                type="url"
-                placeholder='Enter image url'
-                className='block border-b outline-0 pb-2 mt-10'
+                 type="url" 
+                placeholder='enter image url'
             />
 
-            <input 
+            <input
                 {...register('title')}
-                type="text"
-                placeholder='Recipe title'
-                className='block border-b outline-0 pb-2 mt-10'
+                 type="text" 
+                placeholder='Enter title'
             />
 
-            <input 
-                {...register("chef")}
-                type="text"
-                placeholder='Chef name'
-                className='block border-b outline-0 pb-2 mt-10'
+            <input
+                {...register('chef')}
+                 type="text" 
+                 placeholder='chef'
             />
 
             <textarea
-                {...register("desc")}
-                placeholder='// write ingredent'
-                className='block border-b outline-0 pb-2 mt-10'
+                {...register('desc')}
+                placeholder='// Write Ingreadent'
             ></textarea>
 
             <textarea
-                {...register("instrac")}
-                placeholder='// write instraction'
-                className='block border-b outline-0 pb-2 mt-10'
+                {...register('instrac')}
+                placeholder='// Write instraction'
             ></textarea>
 
-            <select
-                {...register("catagory")}
-                className='block border-b outline-0 pb-2 mt-10'
-            >
-                <option value="breackfast">Breackfast</option>
+            <select {...register('catagory')} >
+                <option value="breakfast">BreackFast</option>
                 <option value="lunch">Lunch</option>
-                <option value="supper">Supper</option>
                 <option value="dinner">Dinner</option>
             </select>
 
-            <button className='block mt-5 bg-gray-900 rounded px-4 py-2'>Save Recipe</button>
+            <button>Save recipe</button>
         </form>
     </div>
   )
