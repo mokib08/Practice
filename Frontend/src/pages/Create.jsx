@@ -1,70 +1,76 @@
+import { useContext } from 'react';
 import {useForm} from 'react-hook-form'
+import { recipeContext } from '../context/RecipeContext';
 import {nanoid} from 'nanoid'
-import { useContext } from 'react'
-import { recipeContext } from '../context/RecipeContext'
 
 const Create = () => {
 
-    const [data, setData] = useContext(recipeContext)
-
-   const {
-    register,
-    handleSubmit,
-
-   } = useForm()
+    const {data, setData} = useContext(recipeContext)
 
 
-   const submitHandler = (recipe) => {
-        recipe.id = nanoid()
+    const {
+        register,
+        handleSubmit
+    } = useForm();
+
+
+    const submitHandler = (recip) => {
+
+        recip.id = nanoid();
+
         const copyData = [...data];
-        copyData.push(recipe)
+        copyData.push(recip)
         setData(copyData)
-        
-        
-   }
 
 
-  return (
-    <div>
-        <form onSubmit={handleSubmit(submitHandler)} >
-            <input
-                {...register("image")}
-                 type="url" 
-                placeholder='enter image url'
-            />
+        localStorage.setItem("recipe", JSON.stringify(copyData))
 
-            <input
-                {...register('title')}
-                 type="text" 
-                placeholder='Enter title'
-            />
+            
+    }
 
-            <input
-                {...register('chef')}
-                 type="text" 
-                 placeholder='chef'
-            />
 
-            <textarea
-                {...register('desc')}
-                placeholder='// Write Ingreadent'
-            ></textarea>
+    return (
+        <div>
+            <form onSubmit={handleSubmit(submitHandler)} >
+                <input
+                    {...register('image')}
+                    type="url"
+                    placeholder='Enter image url'
+                />
+                <input
+                    {...register('title')}
+                    type="text"
+                    placeholder='Enter Title'
+                />
+                <input
+                    {...register('chef')}
+                    type="text"
+                    placeholder='Chef Name'
+                />
 
-            <textarea
-                {...register('instrac')}
-                placeholder='// Write instraction'
-            ></textarea>
+                <textarea 
+                    {...register('ingre')}
+                    placeholder='ingredancen'
+                ></textarea>
+                <textarea 
+                    {...register('inst')}
+                    placeholder='instraction'
+                ></textarea>
 
-            <select {...register('catagory')} >
-                <option value="breakfast">BreackFast</option>
-                <option value="lunch">Lunch</option>
-                <option value="dinner">Dinner</option>
-            </select>
+                <select 
+                    {...register('catagory')}
+                >
+                    <option value="breackfast">BreackFast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="supper">Supper</option>
+                    <option value="dinner">Dinner</option>
+                </select>
 
-            <button>Save recipe</button>
-        </form>
-    </div>
-  )
+                <button>Save Recipe</button>
+
+            </form>
+        </div>
+    )
 }
 
 export default Create

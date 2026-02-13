@@ -1,11 +1,12 @@
-import axios from 'axios';
+
+import axios from 'axios'
 
 const instance = axios.create({
     baseURL: "https://fakestoreapi.com/"
 })
 
 instance.interceptors.request.use(
-    function(config){
+    function (config){
         return config
     }, function (error){
         return Promise.reject(error)
@@ -14,12 +15,11 @@ instance.interceptors.request.use(
 
 
 instance.interceptors.response.use(
-    function(response){
-        return response
-    }, function(error){
+    function(config){
+        return config
+    }, function (error){
         return Promise.reject(error)
     }
 )
-
 
 export default instance
